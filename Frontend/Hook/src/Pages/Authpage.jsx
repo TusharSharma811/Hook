@@ -11,10 +11,21 @@ const Authpage = () => {
   const [username , setUsername] = useState("");
   const [password , setPassword] = useState("");
   const [varient , setVarient] = useState("login") ;
-  let url = "http://localhost:4000/auth/signup" ;
+  let url = "http://localhost:4000/auth/" + varient ;
   const navigate = useNavigate() ;
-  const handleclick = ()=>{ useAuth(url ,username , email , password , varient) 
-    navigate("/home") 
+  const handleclick = ()=>{ 
+    const data = useAuth(url ,username , email , password , varient) ;
+    console.log(data);
+    data.then((data)=>{
+      console.log(data);
+      if(data){
+        console.log(data);
+        navigate("/home") 
+      }
+
+    })
+    
+    
   } 
   
   

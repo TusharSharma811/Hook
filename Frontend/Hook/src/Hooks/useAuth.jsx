@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import { useEffect } from "react";
 
 
-const useAuth = (url , username, email, password, varient) => {
+const useAuth = (url , username, email, password) => {
   
-  fetch(url, {
+ let data = fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -18,12 +18,10 @@ const useAuth = (url , username, email, password, varient) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      
       localStorage.setItem( "token" , data.token );
-    })
-  
-   
+      return data ;
+    }) ;
+   return data ;
 };
 
 export default useAuth;

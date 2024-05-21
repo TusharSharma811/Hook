@@ -29,24 +29,32 @@ export const Signup = async (req , res)=>{
         
     } catch (error) {
         console.log(error);
-        res.json({error : error})
+        res.status(400).end() ;
     }
             
             
 }
 export const login = async (req , res)=>{
+    const usercheck = z.object({
+        email : z.string().email() ,
+        password : z.string().min(6 , {message : "Password too short"}).max(13 , {message : "Password too long"}) 
+    })
     try {
         const { email , password} = req.body ;
-             
-            const newuser = await Usermodel.create({
-                 Email : email , Password : password
-            })
-            
-            console.log(newuser);
-            res.json({message : "Logn Successfull"})
+        if(usercheck.safeParse({email , password})){
+
         
+             const user = await Usermodel.findOne({
+                Email : email ,
+                Password : password
+             })
+             console.log(user);
+             const token = generatetoken(user._id) ;
+            res.json({message : "Login Successfull" , token : token})
+            }
     } catch (error) {
         console.log(error);
+        res.status(400).end() ;
     }
             
             
