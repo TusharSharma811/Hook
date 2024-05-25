@@ -16,10 +16,11 @@ const useAuth = (url , username, email, password) => {
       password,
     }),
   })
-    .then((response) => response.json())
-    .then((data) => {
+    .then((response) => { return {status : response.status , data : response.json()}})
+    .then(({status , data}) => {
+      
       localStorage.setItem( "token" , data.token );
-      return data ;
+      return {status , data} ;
     }) ;
    return data ;
 };

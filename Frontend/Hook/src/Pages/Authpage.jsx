@@ -15,12 +15,13 @@ const Authpage = () => {
   const navigate = useNavigate() ;
   const handleclick = ()=>{ 
     const data = useAuth(url ,username , email , password , varient) ;
-    console.log(data);
+    
     data.then((data)=>{
-      console.log(data);
-      if(data){
-        console.log(data);
+      if(data.status == 200){
         navigate("/home") 
+      }
+      else{
+        return
       }
 
     })

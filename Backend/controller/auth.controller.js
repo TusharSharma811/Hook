@@ -15,6 +15,10 @@ export const Signup = async (req , res)=>{
                 return res.send(uservalidation.error.issues.map((e)=> e.message))
 
             }
+            const userdbcheck = await Usermodel.findOne({Email : email }) ;
+            if(userdbcheck){
+                res.status(400).send({error : "User already exist" })
+            }
 
             const newuser = await Usermodel.create({
                 Username : username , Email : email , Password : password
@@ -48,13 +52,13 @@ export const login = async (req , res)=>{
                 Email : email ,
                 Password : password
              })
-             console.log(user);
+            
              const token = generatetoken(user._id) ;
-            res.json({message : "Login Successfull" , token : token})
+            res.status(200).json({message : "Login Successfull" , token : token })
             }
     } catch (error) {
         console.log(error);
-        res.status(400).end() ;
+        res.status(400).send(error)
     }
             
             
