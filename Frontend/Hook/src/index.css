@@ -29,18 +29,36 @@ html{
     .scrollbar-none{
         scrollbar-width: none;
     }
+    .scroll-snap{
+        scroll-snap-type: x mandatory;
+    }
+    .scroll-snap-start{
+        scroll-snap-align:none start;
+    }
     .leftscrollicon{
-        content: "";
+        
         background-image: url("../public/left-chevron-svgrepo-com.svg");
-        position: absolute;
+        
         background-size: cover;
-        top:50% ;
-        left:2px ;
+        
         border: 1px solid black;
         border-radius: 50%;
         height: 6rem ;
         width: 6rem;
-        z-index: 2;
+    
         cursor: pointer;
         }
+        .rightscrollicon{
+           
+            background-image: url("../public/right-chevron-svgrepo-com.svg");
+            
+            background-size: cover;
+            
+            border: 1px solid black;
+            border-radius: 50%;
+            height: 6rem ;
+            width: 6rem;
+           
+            cursor: pointer;
+            }
 }
